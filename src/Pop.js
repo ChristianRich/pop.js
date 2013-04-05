@@ -19,6 +19,7 @@
 		var o = options || {},
 			current,
 			itr,
+			isWizard = false,
 			self = this;
 
 		/**
@@ -56,6 +57,7 @@
 				return;
 			}
 
+			isWizard = false;
 			current.close();
 			current = null;
 		};
@@ -85,6 +87,8 @@
 			}
 
 			self.close();
+			isWizard = true;
+
 			itr.reset();
 			current = itr.next();
 			current.open();
@@ -95,15 +99,13 @@
 		 */
 		self.next = function(){
 
-			if(!current || !itr){
+			if(!isWizard || !itr.hasNext()){
 				return;
 			}
 
-			if(itr.hasNext()){
-				self.close();
-				current = itr.next();
-				current.open();
-			}
+			current.close();
+			current = itr.next();
+			current.open();
 		};
 
 		/**
@@ -111,15 +113,13 @@
 		 */
 		self.previous = function(){
 
-			if(!current || !itr){
+			if(!isWizard || !itr.hasPrevious()){
 				return;
 			}
 
-			if(itr.hasPrevious()){
-				self.close();
-				current = itr.previous();
-				current.open();
-			}
+			current.close();
+			current = itr.previous();
+			current.open();
 		};
 
 		/**
@@ -127,11 +127,11 @@
 		 */
 		self.first = function(){
 
-			if(!current || !itr || itr.getSize() == 1){
+			if(!isWizard || itr.getSize() == 1){
 				return;
 			}
 
-			self.close();
+			current.close();
 			current = itr.first();
 			current.open();
 		};
@@ -141,11 +141,11 @@
 		 */
 		self.last = function(){
 
-			if(!current || !itr || itr.getSize() == 1){
+			if(!isWizard || itr.getSize() == 1){
 				return;
 			}
 
-			self.close();
+			current.close();
 			current = itr.last();
 			current.open();
 		};
