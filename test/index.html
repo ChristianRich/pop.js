@@ -2,97 +2,148 @@
     <head>
         <meta charset="utf-8">
         <title>Pop.js</title>
+
+        <!-- Styling for this page-->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- Styling for the dialogs-->
         <link rel="stylesheet" type="text/css" href="css/pop.css">
+
+        <!-- Styling for the code syntax highlighter-->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../rainbow/themes/github.css">
+
+        <!-- Loading in a custom font -->
         <link href='http://fonts.googleapis.com/css?family=Didact+Gothic|Crimson+Text' rel='stylesheet' type='text/css'>
-        <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
-
-        <script src="../libs/EventDispatcher.js"></script>
-        <script src="../libs/ArrayIterator.js"></script>
-        <script src="../src/Pop.js"></script>
-        <script src="../src/Dialogue.js"></script>
-
-        <!--<script src="../dist/pop.min.js"></script>-->
-
     </head>
     <body>
 
-    <h1>pop.js</h1>
-    <h2>Customizable modal dialogue windows.</h2>
-    <h2>CSS driven. Event driven. No dependancies.</h2>
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+    <script src="../../rainbow/js/rainbow.min.js"></script>
+    <script src="../../rainbow/js/language/javascript.js"></script>
+    <script src="../../rainbow/js/language/html.js"></script>
 
-    <ul>
-        <li>Event notification when dialogs open and close</li>
-        <li>HTML designed dialogs</li>
-        <li>CSS transitions</li>
-        <li>Custom data objects can be passed to dialogs and caught in the event flow</li>
-        <li>Keyboard control</li>
-        <li>Wizards dialogs</li>
-    </ul>
+    <script src="../dist/pop.min.js"></script>
 
-    <br><br>
+    <header id="header">
+        <h1>pop.js</h1>
+    </header>
 
-    <div>
-        <button onclick="pop.open('#d1', {message : 'I am popup window number 1', foo : 'bar'});">Pop me</button>
-        <button onclick="pop.open('#d2');">Pop me too</button>
-        <button onclick="pop.start();">Start a wizard</button>
+    <section id="mainContent">
+
+        <h2>Customizable dialog windows.</h2>
+        <h2>CSS driven. Event driven. No dependancies.</h2>
+
+        <ul>
+            <li>HTML / CSS driven</li>
+            <li>CSS transitions</li>
+            <li>Event notification when dialogs open and close</li>
+            <li>Custom data objects can be passed to dialogs and caught in the event flow</li>
+            <li>Keyboard control</li>
+            <li>Wizards style dialogs</li>
+        </ul>
+
+        <br><br>
+
+        <div>
+            <button onclick="pop.open('#d1', {message : 'I am popup window number 1', foo : 'bar'});">Pop me</button>
+            <button onclick="pop.open('#d2');">Pop another one</button>
+            <button onclick="pop.start();">Start a wizard</button>
+        </div>
+
+        <br><br>
+
+        <p class="msg">HTML: Here we define all the dialogs and hide them using a css class </p>
+        <pre><code data-language="html">
+
+    <div id="d1" class="dialog hidden">
+        <p>Lorem Ipsum dolar amit</p>
+        <button class="close" onclick="pop.close();"></button>
     </div>
 
-    <br><br>
-    <p>Result of last executed command:</p>
-    <div id="result" class="field"></div>
+    <div id="d1" class="dialog hidden">
+        <p>Lorem Ipsum dolar amit</p>
+        <button class="close" onclick="pop.close();"></button>
+    </div>
+        </code></pre>
 
-    <div id="dialogues">
+        <p class="msg">JavsScript: Initializing pop.js and listening for events (optional)</p>
+        <pre><code data-language="javascript">
+    // Create a new instance of Pop.js
+    var pop = new Pop();
 
-        <div id="d1" class="dialogue hidden" role="dialog">
-            <p>Lorem Ipsum. Press 'esc' to close me!</p>
+    // Adding eventlisteners for opening and closing of dialogs (not a requirement but may come in handy)
+    pop.addEventListener('open', function(e){
+        // Do something here
+    });
+
+    pop.addEventListener('close', function(e){
+        // Do something here
+    });
+
+    pop.open('#id'); // Open a dialog passing an id or element
+    pop.close(); // Close the current open dialog
+        </code></pre>
+
+        <br><br>
+
+        <!--Here we define all the dialogs and hide them with a css class -->
+        <div id="d1" class="dialog hidden">
+            <p>I'm a dialog window.<br>Click the 'X' or press esc to close.</p>
             <button class="close" onclick="pop.close();"></button>
         </div>
 
-        <div id="d2" class="dialogue red hidden" role="dialog">
-            <p>I'm no 2</p>
+        <div id="d2" class="dialog red hidden">
+            <h1>1</h1>
+            <p>I'm another dialog window.<br>Click the 'X' or press esc to close.</p>
             <button class="close" onclick="pop.close();"></button>
             <button onclick="pop.open('#d1');">Open another one!</button>
         </div>
 
-        <div id="wiz1" class="dialogue hidden" role="dialog">
-            <p>Wizard 1</p>
+        <div id="wiz1" class="dialog hidden">
+            <h2>One</h2>
+            <p>Wizard are series of windows.<br><br>Once a wizard is started you can navigate back and forth using either buttons or keyboard.</p>
             <button class="close" onclick="pop.close();"></button>
+            <button class="next" onclick="pop.next();">Next</button>
         </div>
 
-        <div id="wiz2" class="dialogue hidden" role="dialog">
-            <p>Wizard 2</p>
+        <div id="wiz2" class="dialog hidden">
+            <h2>Two</h2>
+            <p>Wizrds are just regular dialogs tied together in a series using the pop.add() method.</p>
             <button class="close" onclick="pop.close();"></button>
+            <button class="next" onclick="pop.next();">Next</button>
+            <button class="prev" onclick="pop.previous();">Back</button>
         </div>
 
-        <div id="wiz3" class="dialogue hidden" role="dialog">
-            <p>Wizard 3</p>
+        <div id="wiz3" class="dialog hidden">
+            <h2>Three</h2>
             <button class="close" onclick="pop.close();"></button>
-            <button onclick="pop.previous();">Back</button>
-            <button onclick="pop.next();">Next</button>
+            <button class="prev" onclick="pop.previous();">Back</button>
         </div>
-    </div>
+
+    </section>
 
     <script>
 
         // Create a new instance of Pop.js
         var pop = new Pop();
 
-        // Adding eventlisteners for opening and closing of windows
-        // This is not a requirement but handy if you need to know when individual windows are opened and closed
+        /**
+         *  Adding eventlisteners for opening and closing of windows
+         *  This is not a requirement but handy if you need to know when individual windows are opened and closed
+         */
         pop.addEventListener('open', function(e){
-            console.log('open handler', e);
+            console.log('Element \'' + e.currentTarget.id + '\' open');
         });
 
         pop.addEventListener('close', function(e){
-            console.log('close handler', e);
+            console.log('Element \'' + e.currentTarget.id + '\' close');
         });
 
         /**
-         * You can also add a series of dialogues that are keyboard controlled
-         * Left arrow       : Next dialogue (if any)
-         * Right arrow      : Previous dialogue (if any)
-         * Up arrow         : First dialogue in the series
+         * You can also add a series of dialogs that are keyboard controlled and acts like a wizard
+         * Left arrow       : Next dialog (if any)
+         * Right arrow      : Previous dialog (if any)
+         * Up arrow         : First dialog in the series
          * Down arrow       : Last idalogue in the series
          */
         pop.add('#wiz1');
