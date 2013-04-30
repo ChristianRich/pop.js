@@ -182,6 +182,8 @@
 		 */
 		var keyDownHandler = function(e){
 
+			e.preventDefault();
+
 			switch(e.keyCode){
 
 				// Esc close any open dialogue
@@ -212,10 +214,24 @@
 		};
 
 		var dialogOpenHandler = function(e){
+
+			if(!!window.addEventListener){
+				window.addEventListener('keydown', keyDownHandler, false);
+			} else if(!!window.attachEvent){
+				window.attachEvent('keydown', keyDownHandler);
+			}
+
 			self.dispatchEvent(self.clone(e));
 		};
 
 		var dialogCloseHandler = function(e){
+
+			if(!!window.removeEventListener){
+				window.removeEventListener('keydown', keyDownHandler, false);
+			} else if(!!window.detachEvent){
+				window.detachEvent('keydown', keyDownHandler);
+			}
+
 			self.dispatchEvent(self.clone(e));
 		};
 
@@ -238,8 +254,6 @@
 			d.addEventListener('close', dialogCloseHandler);
 			return d;
 		};
-
-		window.addEventListener('keydown', keyDownHandler, false);
 	};
 
 	/**

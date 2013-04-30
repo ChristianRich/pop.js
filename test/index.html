@@ -18,11 +18,11 @@
     <body>
 
     <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
-    <script src="../../rainbow/js/rainbow.min.js"></script>
-    <script src="../../rainbow/js/language/javascript.js"></script>
-    <script src="../../rainbow/js/language/html.js"></script>
+    <script src="https://raw.github.com/ChristianDen/pop.js/master/test/js/rainbow/rainbow.min.js"></script>
+    <script src="https://raw.github.com/ChristianDen/pop.js/master/test/js/rainbow/language/javascript.js"></script>
+    <script src="https://raw.github.com/ChristianDen/pop.js/master/test/js/rainbow/language/html.js"></script>
 
-    <script src="../dist/pop.min.js"></script>
+    <script src="https://raw.github.com/ChristianDen/pop.js/master/dist/pop.min.js"></script>
 
     <div id="container">
 
@@ -32,7 +32,7 @@
 
         <section id="mainContent">
 
-            <h2>Customizable dialog windows.</h2>
+            <h2>Modal dialogs made easy.</h2>
             <h2>CSS driven. Event driven. No dependancies.</h2>
 
             <ul>
@@ -53,9 +53,8 @@
 
             <br><br>
 
-            <p class="msg">HTML: Here we define all the dialogs and hide them using a css class </p>
+            <p class="msg">HTML: Here we define all the dialogs and hide them using a CSS class</p>
             <pre><code data-language="html">
-
         <div id="myDialog1" class="dialog hidden">
             <p>Lorem Ipsum dolar amit</p>
             <button class="close" onclick="pop.close();"></button>
@@ -125,7 +124,6 @@
                 <p>pop.add('#myDialog1');<br>
                     pop.add('#myDialog2');<br>
                     pop.add('#myDialog3');
-
                 </p>
                 <button class="close" onclick="pop.close();"></button>
                 <div class="arrow prev" onclick="pop.previous();"></div>
