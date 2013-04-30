@@ -10,3 +10,4 @@ Pop.js handles the flow of modal dialog windows.
 * Optional background overlay
 * Wizards style dialogs
 
+*Take it for a test drive: http://lab.bitworks.me/pop.js/*
