@@ -20,7 +20,8 @@
 			current,
 			itr,
 			isWizard = false,
-			self = this;
+			self = this,
+			cover = null;
 
 		/**
 		 * STATIC PROPERTIES
@@ -148,6 +149,31 @@
 			current.close();
 			current = itr.last();
 			current.open();
+		};
+
+		/**
+		 * Show a page overlay
+		 * @param idOrElement The element or id of the page overlay
+		 */
+		self.showOverlay = function(idOrElement){
+			cover = Pop.getTarget(idOrElement);
+			Pop.removeClass(cover, Pop.CLASS_HIDDEN);
+			Pop.addClass(cover, Pop.CLASS_VISIBLE)
+		};
+
+		/**
+		 * Hides the current page coverlay
+		 */
+		self.hideOverlay = function(){
+
+			if(!cover){
+				return;
+			}
+
+			Pop.removeClass(cover, Pop.CLASS_VISIBLE);
+			Pop.addClass(cover, Pop.CLASS_HIDDEN)
+
+			cover = null;
 		};
 
 		/**

@@ -17,11 +17,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline; 
+    vertical-align: baseline;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
-    display:block; 
+    display:block;
 }
 
 h1{
@@ -116,19 +116,13 @@ a {
     color: hsl(206, 80%, 50%);
 }
 
-::-moz-selection{ 
+::selection, ::-moz-selection{
     background:#47bfa2;
     color:#fff;
     text-shadow:none; 
 }
 
-::selection{ 
-    background:#47bfa2;
-    color:#fff;
-    text-shadow:none;
-}
-
-::-webkit-scrollbar{ 
+::-webkit-scrollbar{
 	margin-right:5px;
 	background-color:#ddd;
 	width:10px;
@@ -164,6 +158,12 @@ a {
     height: auto;
 }
 
+#container {
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
 #header{
     background-color: darkblue;
     color: white;
@@ -172,8 +172,4 @@ a {
     padding: 20px;
     padding-bottom: 40px;
     margin-bottom: 40px;
-}
-
-.msg{
-    padding-bottom: 20px;
 }
